@@ -16,7 +16,7 @@
     "@osjs/cli": "^3.0.0",
     "node-pty": "^0.7.0",
     "uuid": "^3.1.0",
-    "xterm": "^2.9.2"
+    "xterm": "^3.1.0"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
