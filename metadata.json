@@ -1,0 +1,15 @@
+{
+  "name": "Xterm",
+  "category": "network",
+  "title": {
+    "en_EN": "Xterm"
+  },
+  "description": {
+    "en_EN": "Xterm"
+  },
+  "server": "server.js",
+  "files": [
+    "index.js",
+    "index.css"
+  ]
+}
