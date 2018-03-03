@@ -94,14 +94,13 @@ const init = async (core, metadata) => {
 
     const uuid = uuidv4();
     const {connection} = req.body;
-    const uri = connection.uri;
 
     connections[uuid] = {
       options: req.body,
       uuid,
     };
 
-    res.json({uuid, uri});
+    res.json({uuid});
   });
 
   app.post(`/packages/${metadata._path}/resize`, (req, res) => {
