@@ -29,7 +29,6 @@
  */
 
 const pty = require('node-pty');
-const WebSocket = require('ws');
 const uuidv4 = require('uuid/v4');
 
 let connections = {};
