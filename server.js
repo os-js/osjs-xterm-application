@@ -34,6 +34,9 @@ const uuidv4 = require('uuid/v4');
 let connections = {};
 let terminals = [];
 
+/**
+ * Creates a new Terminal
+ */
 const createTerminal = (ws, options, args = []) => {
   console.log('[Xterm]', 'Creating terminal...');
   const size = options.size || {cols: 80, rows: 24};
@@ -63,11 +66,17 @@ const createTerminal = (ws, options, args = []) => {
   ws.on('message', (data) => term.write(data));
   ws.on('close', () => kill());
 
-  terminals.push(term);
+  terminals.push({
+    uuid: options.uuid,
+    terminal: term
+  });
 
   return term;
 };
 
+/**
+ * Creates a new Terminal connection
+ */
 const createConnection = (ws) => {
   console.log('[Xterm]', 'Creating connection...');
   let pinged = false;
@@ -85,6 +94,9 @@ const createConnection = (ws) => {
   });
 };
 
+/**
+ * Add routes for application
+ */
 const init = async (core, metadata) => {
   const {app} = core;
 
@@ -105,24 +117,34 @@ const init = async (core, metadata) => {
   app.post(`/packages/${metadata._path}/resize`, (req, res) => {
     console.log('[Xterm]', 'Requested resize...');
 
-    const {size, pid} = req.body;
+    const {size, pid, uuid} = req.body;
     const {cols, rows} = size;
 
-    const found = terminals.find(term => term.pid === pid);
+    const found = terminals.find(iter => (
+      iter.terminal.pid === pid && iter.uuid === uuid
+    ));
+
     if (found) {
-      found.resize(cols, rows);
+      found.terminal.resize(cols, rows);
     }
   });
-};
 
-const start = (core, metadata) => {
   core.app.ws(`/packages/${metadata._path}/socket`, (ws, req) => {
     createConnection(ws);
   });
 };
 
+/**
+ * Start the server
+ */
+const start = (core, metadata) => {
+};
+
+/**
+ * Destroy the server
+ */
 const destroy = () => {
-  terminals.forEach(term => term.kill());
+  terminals.forEach(iter => iter.terminal.kill());
   terminals = [];
 };
 

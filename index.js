@@ -49,10 +49,11 @@ const createConnection = async (core, proc, win, term) => {
 
   const response = await proc.request('/create', params);
   const ws = proc.socket();
+  const uuid = response.uuid;
   let pinged = false;
   let pid = -1;
 
-  ws.on('open', () => ws.send(response.uuid));
+  ws.on('open', () => ws.send(uuid));
 
   ws.on('message', (ev) => {
     if ( !pinged ) {
@@ -64,7 +65,7 @@ const createConnection = async (core, proc, win, term) => {
 
   term.on('resize', (size) => {
     const {cols, rows} = size;
-    proc.request('/resize', {size: {cols, rows}, pid});
+    proc.request('/resize', {size: {cols, rows}, pid, uuid});
   });
 
   win.on('destroy', () => ws.close());
