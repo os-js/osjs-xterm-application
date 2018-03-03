@@ -52,15 +52,15 @@ const createConnection = async (core, proc, win, term) => {
   let pinged = false;
   let pid = -1;
 
-  ws.onopen = () => ws.send(response.uuid);
+  ws.on('open', () => ws.send(response.uuid));
 
-  ws.onmessage = (ev) => {
+  ws.on('message', (ev) => {
     if ( !pinged ) {
       pinged = true;
       pid = parseInt(ev.data, 10);
-      term.attach(ws);
+      term.attach(ws.connection);
     }
-  };
+  });
 
   term.on('resize', (size) => {
     const {cols, rows} = size;
