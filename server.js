@@ -128,7 +128,7 @@ const init = async (core, metadata) => {
     }
   });
 
-  core.app.ws(`/packages/${metadata._path}/socket`, (ws, req) => {
+  app.ws(`/packages/${metadata._path}/socket`, (ws, req) => {
     createConnection(ws);
   });
 };
