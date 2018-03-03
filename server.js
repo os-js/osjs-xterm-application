@@ -104,7 +104,6 @@ const init = async (core, metadata) => {
     console.log('[Xterm]', 'Requested connection...');
 
     const uuid = uuidv4();
-    const {connection} = req.body;
 
     connections[uuid] = {
       options: req.body,
