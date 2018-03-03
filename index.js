@@ -92,8 +92,7 @@ const createTerminal = (core, proc, index) => {
     id: 'Xterm_' + String(index),
     title: proc.metadata.title.en_EN,
     state: {
-      dimension: {width: 400, height: 400},
-      position: {left: 700, top: 200}
+      dimension: {width: 960, height: 288}
     }
   })
     .on('resized', fit)
