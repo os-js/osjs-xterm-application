@@ -29,3 +29,15 @@
  */
 
 @import './node_modules/xterm/dist/xterm.css';
+
+.Window_Xterm {
+  .osjs-window-content {
+    background: #000;
+  }
+
+  .terminal,
+  .xterm-viewport {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
