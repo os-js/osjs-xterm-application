@@ -34,13 +34,13 @@ import Terminal from 'xterm';
  * Creates a new Terminal connection
  */
 const createConnection = async (core, proc, win, term) => {
+  const {protocol, hostname, port} = window.location;
+  const path = proc.resource('/socket');
+  const uri = `${protocol.replace('http', 'ws')}//${hostname}:${port}${path}`;
+
   const params = {
     connection: {
-      protocol: window.location.protocol.replace('http', 'ws'),
-      hostname: window.location.hostname,
-      port: 8001,
-      uri: null,
-      path: '/'
+      uri
     },
     size: {
       cols: term.cols,
@@ -51,12 +51,9 @@ const createConnection = async (core, proc, win, term) => {
   term.fit();
   term.clear();
   term.writeln('Requesting connection....');
+  term.writeln(`Using ${uri}`);
 
-  console.warn(term)
   const response = await proc.request('/create', params);
-
-  term.writeln(`Connecting to ${response.uri}`);
-
   const ws = new WebSocket(response.uri);
   let pinged = false;
   let pid = -1;

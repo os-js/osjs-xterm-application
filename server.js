@@ -34,7 +34,6 @@ const uuidv4 = require('uuid/v4');
 
 let connections = {};
 let terminals = [];
-let wss = null;
 
 const createTerminal = (ws, options, args = []) => {
   console.log('[Xterm]', 'Creating terminal...');
@@ -94,21 +93,15 @@ const init = async (core, metadata) => {
     console.log('[Xterm]', 'Requested connection...');
 
     const uuid = uuidv4();
-
     const {connection} = req.body;
-    const uri = connection.uri
-      ? connection.uri
-      : `${connection.protocol}//${connection.hostname}:${connection.port}${connection.path}`;
+    const uri = connection.uri;
 
     connections[uuid] = {
       options: req.body,
       uuid,
     };
 
-    res.json({
-      uuid,
-      uri
-    });
+    res.json({uuid, uri});
   });
 
   app.post(`/packages/${metadata._path}/resize`, (req, res) => {
@@ -124,21 +117,14 @@ const init = async (core, metadata) => {
   });
 };
 
-const start = () => {
-  wss = new WebSocket.Server({
-    port: 8001 // FIXME
+const start = (core, metadata) => {
+  core.app.ws(`/packages/${metadata._path}/socket`, (ws, req) => {
+    createConnection(ws);
   });
-
-  wss.on('connection', (ws) => createConnection(ws));
 };
 
 const destroy = () => {
   terminals.forEach(term => term.kill());
-
-  if (wss) {
-    wss.close();
-  }
-
   terminals = [];
 };
 
