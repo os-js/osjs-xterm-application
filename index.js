@@ -28,7 +28,9 @@
  * @licence Simplified BSD License
  */
 
-import Terminal from 'xterm';
+import {Terminal} from 'xterm';
+import * as fit from 'xterm/lib/addons/fit/fit';
+import * as attach from 'xterm/lib/addons/attach/attach';
 
 /*
  * Creates a new Terminal connection
@@ -111,8 +113,8 @@ const createTerminal = (core, proc, index) => {
 // Callback for launching application
 //
 OSjs.make('osjs/packages').register('Xterm', (core, args, options, metadata) => {
-  Terminal.loadAddon('fit');
-  Terminal.loadAddon('attach');
+  Terminal.applyAddon(fit);
+  Terminal.applyAddon(attach);
 
   const proc = core.make('osjs/application', {
     args,
