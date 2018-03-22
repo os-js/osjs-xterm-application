@@ -126,7 +126,22 @@ OSjs.make('osjs/packages').register('Xterm', (core, args, options, metadata) => 
     }
   });
 
-  createTerminal(core, proc, proc.windows.length);
+  const createWindow = () => createTerminal(core, proc, proc.windows.length);
+
+  if (core.has('osjs/tray')) {
+    const tray = core.make('osjs/tray').create({}, (ev) => {
+      core.make('osjs/contextmenu').show({
+        position: ev,
+        menu: [
+          {label: 'New Window', onclick: () => createWindow()}
+        ]
+      });
+    });
+
+    proc.on('destroy', () => tray.destroy());
+  }
+
+  createWindow();
 
   return proc;
 });
