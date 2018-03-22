@@ -95,6 +95,7 @@ const createTerminal = (core, proc, index) => {
   proc.createWindow({
     id: 'Xterm_' + String(index),
     title: proc.metadata.title.en_EN,
+    icon: proc.resource(proc.metadata.icon),
     dimension: {width: 960, height: 288}
   })
     .on('resized', fit)
@@ -129,7 +130,9 @@ OSjs.make('osjs/packages').register('Xterm', (core, args, options, metadata) => 
   const createWindow = () => createTerminal(core, proc, proc.windows.length);
 
   if (core.has('osjs/tray')) {
-    const tray = core.make('osjs/tray').create({}, (ev) => {
+    const tray = core.make('osjs/tray').create({
+      icon: proc.resource(metadata.icon),
+    }, (ev) => {
       core.make('osjs/contextmenu').show({
         position: ev,
         menu: [

@@ -38,6 +38,9 @@ const {
 module.exports = (options) => packageWebpackConfiguration(__dirname, options, {
   minimize: production,
   sourceMap: true,
+  copy: [
+    path.resolve(__dirname, 'logo.svg')
+  ],
   entry: {
     index: [
       path.resolve(__dirname, 'index.js'),
