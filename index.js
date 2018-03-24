@@ -136,7 +136,7 @@ OSjs.make('osjs/packages').register('Xterm', (core, args, options, metadata) => 
       core.make('osjs/contextmenu').show({
         position: ev,
         menu: [
-          {label: 'New Window', onclick: () => createWindow()}
+          {label: 'New terminal', onclick: () => createWindow()}
         ]
       });
     });
