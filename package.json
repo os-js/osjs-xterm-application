@@ -13,7 +13,7 @@
     "osjs"
   ],
   "dependencies": {
-    "@osjs/cli": "^3.0.0-alpha",
+    "@osjs/cli": "^3.0.0-alpha.8",
     "node-pty": "^0.7.0",
     "uuid": "^3.1.0",
     "xterm": "^3.1.0"

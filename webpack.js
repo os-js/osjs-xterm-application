@@ -29,15 +29,11 @@
  */
 
 const path = require('path');
-const {
-  packageWebpackConfiguration,
-  webpack,
-  production
-} = require('@osjs/cli')
+const manifest = require('./metadata.json');
+const {createWebpack} = require('@osjs/cli')
 
-module.exports = (options) => packageWebpackConfiguration(__dirname, options, {
-  minimize: production,
-  sourceMap: true,
+module.exports = (options) => createWebpack(__dirname, {
+  outputPath: path.resolve(options.dist.packages, manifest.name),
   copy: [
     path.resolve(__dirname, 'logo.svg')
   ],
