@@ -97,10 +97,10 @@ const createConnection = (ws) => {
 /**
  * Add routes for application
  */
-const init = async (core, metadata) => {
+const init = async (core, proc) => {
   const {app} = core;
 
-  app.post(`/packages/${metadata._path}/create`, (req, res) => {
+  app.post(proc.resource('/create'), (req, res) => {
     console.log('[Xterm]', 'Requested connection...');
 
     const uuid = uuidv4();
@@ -113,7 +113,7 @@ const init = async (core, metadata) => {
     res.json({uuid});
   });
 
-  app.post(`/packages/${metadata._path}/resize`, (req, res) => {
+  app.post(proc.resource('/resize'), (req, res) => {
     console.log('[Xterm]', 'Requested resize...');
 
     const {size, pid, uuid} = req.body;
@@ -128,7 +128,7 @@ const init = async (core, metadata) => {
     }
   });
 
-  app.ws(`/packages/${metadata._path}/socket`, (ws, req) => {
+  app.ws(proc.resource('/socket'), (ws, req) => {
     createConnection(ws);
   });
 };
@@ -136,7 +136,7 @@ const init = async (core, metadata) => {
 /**
  * Start the server
  */
-const start = (core, metadata) => {
+const start = (core, proc) => {
 };
 
 /**
