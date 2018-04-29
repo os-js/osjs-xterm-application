@@ -2,6 +2,7 @@
   "name": "Xterm",
   "category": "network",
   "icon": "logo.svg",
+  "singleton": true,
   "title": {
     "en_EN": "Xterm"
   },

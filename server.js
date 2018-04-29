@@ -133,11 +133,6 @@ const init = async (core, proc) => {
   });
 };
 
-/**
- * Start the server
- */
-const start = (core, proc) => {
-};
 
 /**
  * Destroy the server
@@ -147,8 +142,9 @@ const destroy = () => {
   terminals = [];
 };
 
-module.exports = {
-  init,
-  start,
-  destroy
+module.exports = (core, proc) => {
+  return {
+    init: () => init(core, proc),
+    destroy
+  };
 };
