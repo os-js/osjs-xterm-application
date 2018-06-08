@@ -146,5 +146,7 @@ OSjs.make('osjs/packages').register('Xterm', (core, args, options, metadata) => 
 
   createWindow();
 
+  proc.on('attention', () => createWindow());
+
   return proc;
 });
