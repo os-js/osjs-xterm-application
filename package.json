@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/os-js/osjs-xterm-package/issues"
   },
-  "homepage": "https://github.com/os-js/osjs-xterm-package#readme"
+  "homepage": "https://github.com/os-js/osjs-xterm-package#readme",
+  "osjs": {
+    "type": "package"
+  }
 }
