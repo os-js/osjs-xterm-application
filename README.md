@@ -12,5 +12,3 @@
 # OS.js v3 Xterm Package
 
 This is the Xterm Package for OS.js v3
-
-**PLEASE NOTE THAT THIS IS AN ALPHA PRE-RELEASE AND SUBJECT TO CHANGE WITHOUT NOTICE**
