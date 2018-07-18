@@ -58,7 +58,7 @@ const createConnection = async (core, proc, win, term) => {
   ws.on('open', () => ws.send(uuid));
 
   ws.on('message', (ev) => {
-    if ( !pinged ) {
+    if (!pinged) {
       pinged = true;
       pid = parseInt(ev.data, 10);
       term.attach(ws.connection);

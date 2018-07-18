@@ -82,7 +82,7 @@ const createConnection = (ws) => {
   let pinged = false;
 
   ws.on('message', (uuid) => {
-    if ( !pinged ) {
+    if (!pinged) {
       try {
         const term = createTerminal(ws, connections[uuid]);
         ws.send(String(term.pid));
