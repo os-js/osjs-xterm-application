@@ -8,7 +8,7 @@
     "stylelint": "stylelint index.scss",
     "build": "webpack",
     "watch": "webpack --watch",
-    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build"
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && NODE_ENV=production npm run build"
   },
   "files": [
     "dist/",
