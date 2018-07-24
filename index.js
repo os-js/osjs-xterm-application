@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+import './index.scss';
 import {Terminal} from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
 import * as attach from 'xterm/lib/addons/attach/attach';
