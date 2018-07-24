@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/os-js/osjs-xterm-package.git"
+    "url": "git+https://github.com/os-js/osjs-xterm-application.git"
   },
   "keywords": [
     "osjs"
@@ -29,9 +29,9 @@
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/os-js/osjs-xterm-package/issues"
+    "url": "https://github.com/os-js/osjs-xterm-application/issues"
   },
-  "homepage": "https://github.com/os-js/osjs-xterm-package#readme",
+  "homepage": "https://github.com/os-js/osjs-xterm-application#readme",
   "osjs": {
     "type": "package"
   },
