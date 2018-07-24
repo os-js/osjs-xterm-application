@@ -18,5 +18,4 @@ This is the Xterm Application for OS.js v3
 ```bash
 npm install --save @osjs/xterm-application
 npm run package:discover
-npm run build:manifest
 ```
