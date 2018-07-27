@@ -105,7 +105,10 @@ const createTerminal = (core, proc, index) => {
     .on('moved', () => term.focus())
     .on('focus', () => term.focus())
     .on('blur', () => term.blur())
-    .on('render', (win) => createConnection(core, proc, win, term))
+    .on('render', (win) => {
+      createConnection(core, proc, win, term);
+      win.focus();
+    })
     .render(render);
 };
 
