@@ -13,6 +13,8 @@
 
 This is the Xterm Application for OS.js v3
 
+![Screenshot](https://raw.githubusercontent.com/os-js/osjs-xterm-application/master/screenshot.png)
+
 ## Installation
 
 ```bash
