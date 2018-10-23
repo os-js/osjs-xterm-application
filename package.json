@@ -23,7 +23,7 @@
     "osjs"
   ],
   "dependencies": {
-    "node-pty": "^0.7.6",
+    "node-pty": "^0.7.8",
     "uuid": "^3.3.2"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
@@ -36,26 +36,26 @@
     "type": "package"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/plugin-transform-runtime": "^7.0.0-rc.1",
-    "@babel/preset-env": "^7.0.0-rc.1",
-    "@babel/runtime": "^7.0.0-rc.1",
-    "@osjs/gui": "^3.0.0-alpha.33",
-    "babel-loader": "^8.0.0-beta.4",
-    "copy-webpack-plugin": "^4.5.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.1.2",
+    "@osjs/gui": "^3.0.0-alpha.35",
+    "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^4.5.4",
     "css-loader": "^1.0.0",
-    "eslint": "^5.4.0",
+    "eslint": "^5.7.0",
     "file-loader": "^1.1.11",
-    "hyperapp": "^1.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.3",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "hyperapp": "^1.2.9",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "sass-loader": "^7.1.0",
-    "stylelint": "^9.4.0",
+    "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.3.0",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "xterm": "^3.6.0"
+    "stylelint-scss": "^3.3.2",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2",
+    "xterm": "^3.8.0"
   }
 }
