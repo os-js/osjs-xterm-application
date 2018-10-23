@@ -4,10 +4,12 @@
   "icon": "logo.svg",
   "singleton": true,
   "title": {
-    "en_EN": "Xterm"
+    "en_EN": "Xterm",
+    "nb_NO": "Xterm"
   },
   "description": {
-    "en_EN": "Xterm"
+    "en_EN": "Xterm remote shell",
+    "nb_NO": "Xterm shell via fjerntjener"
   },
   "server": "server.js",
   "files": [
