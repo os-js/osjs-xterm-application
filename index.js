@@ -50,7 +50,7 @@ const createConnection = async (core, proc, win, term) => {
   term.clear();
   term.writeln('Requesting connection....');
 
-  const response = await proc.request('/create', params);
+  const response = await proc.request('/create', {method: 'post', body: params});
   const ws = proc.socket();
   const uuid = response.uuid;
   let pinged = false;
@@ -68,7 +68,7 @@ const createConnection = async (core, proc, win, term) => {
 
   term.on('resize', (size) => {
     const {cols, rows} = size;
-    proc.request('/resize', {size: {cols, rows}, pid, uuid});
+    proc.request('/resize', {method: 'post', body: {size: {cols, rows}, pid, uuid}});
   });
 
   win.on('destroy', () => ws.close());
