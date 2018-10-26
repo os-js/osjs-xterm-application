@@ -5,11 +5,15 @@
   "singleton": true,
   "title": {
     "en_EN": "Xterm",
-    "nb_NO": "Xterm"
+    "nb_NO": "Xterm",
+    "fr_FR": "Xterm",
+    "de_DE": "Xterm"
   },
   "description": {
     "en_EN": "Xterm remote shell",
-    "nb_NO": "Xterm shell via fjerntjener"
+    "nb_NO": "Xterm shell via fjerntjener",
+    "fr_FR": "Shell distant Xterm",
+    "de_DE": "Entfernte Shell Xterm"
   },
   "server": "server.js",
   "files": [
