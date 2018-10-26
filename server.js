@@ -37,8 +37,15 @@ let terminals = [];
 /**
  * Creates a new Terminal
  */
-const createTerminal = (ws, options, args = []) => {
-  console.log('[Xterm]', 'Creating terminal...');
+const createTerminal = (core, ws, options, args = []) => {
+  const useLogin = core.config('xterm.login', true);
+  if (useLogin) {
+    const username = typeof useLogin === 'string' ? useLogin : options.username;
+    args = [...args, '-c', `ssh ${username}@localhost`];
+  }
+
+  console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
+
   const size = options.size || {cols: 80, rows: 24};
   const term = pty.spawn('bash', args, {
     cols: size.cols,
@@ -77,14 +84,14 @@ const createTerminal = (ws, options, args = []) => {
 /**
  * Creates a new Terminal connection
  */
-const createConnection = (ws) => {
+const createConnection = (core, ws) => {
   console.log('[Xterm]', 'Creating connection...');
   let pinged = false;
 
   ws.on('message', (uuid) => {
     if (!pinged) {
       try {
-        const term = createTerminal(ws, connections[uuid]);
+        const term = createTerminal(core, ws, connections[uuid]);
         ws.send(String(term.pid));
         pinged = {uuid, pid: term.pid};
       } catch (e) {
@@ -103,11 +110,13 @@ const init = async (core, proc) => {
   app.post(proc.resource('/create'), (req, res) => {
     console.log('[Xterm]', 'Requested connection...');
 
+    const username = req.session.user.username;
     const uuid = uuidv4();
 
     connections[uuid] = {
       options: req.body,
-      uuid,
+      username,
+      uuid
     };
 
     res.json({uuid});
@@ -129,7 +138,7 @@ const init = async (core, proc) => {
   });
 
   app.ws(proc.resource('/socket'), (ws, req) => {
-    createConnection(ws);
+    createConnection(core, ws);
   });
 };
 
