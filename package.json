@@ -40,7 +40,6 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/runtime": "^7.1.2",
-    "@osjs/gui": "^3.0.0-alpha.35",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.5.4",
     "css-loader": "^1.0.0",
