@@ -22,9 +22,17 @@ This is the Xterm Application for OS.js v3
 
 ## Installation
 
+Install [@osjs/cli](https://npmjs.com/package/@osjs/cli) globally for discovering installed third-party packages and more.
+
+```bash
+npm install --global @osjs/cli
+```
+
+and then install this package.
+
 ```bash
 npm install --save @osjs/xterm-application
-npm run package:discover
+osjs-cli package:discover
 ```
 
 # Usage
