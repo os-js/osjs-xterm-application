@@ -28,6 +28,7 @@
  * @licence Simplified BSD License
  */
 
+const os = require('os');
 const pty = require('node-pty');
 const uuidv4 = require('uuid/v4');
 
@@ -46,8 +47,9 @@ const createTerminal = (core, ws, options, args = []) => {
 
   console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
 
+  const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
   const size = options.size || {cols: 80, rows: 24};
-  const term = pty.spawn('bash', args, {
+  const term = pty.spawn(shell, args, {
     cols: size.cols,
     rows: size.rows,
     name: 'xterm-color',
