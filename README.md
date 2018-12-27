@@ -23,7 +23,7 @@ This is the Xterm Application for OS.js v3
 ## Installation
 
 ```bash
-npm install --save @osjs/xterm-application
+npm install --save --production @osjs/xterm-application
 npm run package:discover
 ```
 
