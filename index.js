@@ -90,7 +90,7 @@ const createTerminal = (core, proc, index) => {
   const render = ($content) => {
     term.open($content);
     term.fit();
-    term.blur();
+    term.focus();
   };
 
   proc.createWindow({
