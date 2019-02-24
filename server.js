@@ -38,7 +38,7 @@ let terminals = [];
 /**
  * Creates a new Terminal
  */
-const createTerminal = (core, ws, options, args = []) => {
+const createTerminal = (core, ws, options = {}, args = []) => {
   const useLogin = core.config('xterm.login', true);
   if (useLogin) {
     const username = typeof useLogin === 'string' ? useLogin : options.username;
