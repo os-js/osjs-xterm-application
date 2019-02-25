@@ -99,7 +99,10 @@ const createTerminal = (core, proc, index) => {
     id: 'Xterm_' + String(index),
     title: proc.metadata.title.en_EN,
     icon: proc.resource(proc.metadata.icon),
-    dimension: {width: 960, height: 288}
+    dimension: {width: 960, height: 288},
+    attributes: {
+      classNames: ['Window_Xterm']
+    }
   })
     .on('resized', fit)
     .on('maximize', fit)
