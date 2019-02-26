@@ -28,8 +28,6 @@
  * @licence Simplified BSD License
  */
 
-@import './node_modules/xterm/dist/xterm.css';
-
 .Window_Xterm {
   .osjs-window-content {
     background: #000;
@@ -40,4 +38,6 @@
     width: 100% !important;
     height: 100% !important;
   }
+
+  @import 'xterm';
 }
