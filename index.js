@@ -32,8 +32,10 @@ import './index.scss';
 import {Terminal} from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
 import * as attach from 'xterm/lib/addons/attach/attach';
+import * as clipboard from 'clipboard-polyfill';
 import osjs from 'osjs';
 import {name as applicationName} from './metadata.json';
+
 
 /*
  * Creates a new Terminal connection
@@ -112,6 +114,24 @@ const createTerminal = (core, proc, index) => {
     term.open($content);
     term.fit();
     term.focus();
+
+    $content.addEventListener('contextmenu', ev => {
+      ev.preventDefault();
+
+      core.make('osjs/contextmenu', {
+        position: ev,
+        menu: [{
+          label: 'Copy text selection',
+          onclick: () => clipboard.writeText(
+            term.getSelection()
+          )
+        }, {
+          label: 'Paste from clipboard',
+          onclick: () => clipboard.readText()
+            .then(data => term.write(data))
+        }]
+      });
+    });
   };
 
   proc.createWindow({

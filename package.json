@@ -41,6 +41,7 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/runtime": "^7.2.0",
     "babel-loader": "^8.0.5",
+    "clipboard-polyfill": "^2.7.0",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "eslint": "^5.12.0",
