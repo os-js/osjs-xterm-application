@@ -53,8 +53,13 @@ const createConnection = async (core, proc, win, term) => {
   term.writeln('Requesting connection....');
 
   const response = await proc.request('/create', {method: 'post', body: params});
-  const ws = proc.socket();
+  const ws = proc.socket('/socket', {
+    socket: {
+      reconnect: false
+    }
+  });
   const uuid = response.uuid;
+  let closed = false;
   let pinged = false;
   let pid = -1;
 
@@ -65,6 +70,17 @@ const createConnection = async (core, proc, win, term) => {
       pinged = true;
       pid = parseInt(ev.data, 10);
       term.attach(ws.connection);
+    }
+  });
+
+  ws.on('close', () => {
+    term.writeln('... Disconnected. Press any key to close terminal ...');
+    closed = true;
+  });
+
+  term.on('key', () => {
+    if (closed) {
+      win.destroy();
     }
   });
 
