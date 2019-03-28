@@ -73,7 +73,10 @@ const createConnection = async (core, proc, win, term) => {
     proc.request('/resize', {method: 'post', body: {size: {cols, rows}, pid, uuid}});
   });
 
-  win.on('destroy', () => ws.close());
+  win.on('destroy', () => {
+    ws.destroy();
+    term.destroy();
+  });
 };
 
 /*
