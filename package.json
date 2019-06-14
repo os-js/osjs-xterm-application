@@ -40,6 +40,7 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/runtime": "^7.2.0",
+    "@osjs/eslint-config": "^1.0.0",
     "babel-loader": "^8.0.5",
     "clipboard-polyfill": "^2.7.0",
     "copy-webpack-plugin": "^4.6.0",
