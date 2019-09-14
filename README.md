@@ -38,11 +38,27 @@ Start from application menu.
 
 If you want to change this behavior, you can add this to your `src/server/config.js` file in the OS.js distribution:
 
-```
+```javascript
 {
   xterm: {
     // You can also set this as a string to force a username
     login: false
+  }
+}
+```
+
+You can also change the connection arguments:
+
+```javascript
+{
+  xterm: {
+    ssh: {
+      // Custom hostname
+      hostname: 'localhost',
+
+      // Custom port
+      args: '-p 1022'
+    }
   }
 }
 ```

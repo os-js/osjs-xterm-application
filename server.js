@@ -40,9 +40,12 @@ let terminals = [];
  */
 const createTerminal = (core, ws, options = {}, args = []) => {
   const useLogin = core.config('xterm.login', true);
+  const hostname = core.config('xterm.ssh.hostname', 'localhost');
+  const extraArguments = core.config('xterm.ssh.args', '');
+
   if (useLogin) {
     const username = typeof useLogin === 'string' ? useLogin : options.username;
-    args = [...args, '-c', `ssh ${username}@localhost`];
+    args = [...args, '-c', `ssh ${extraArguments} ${username}@${hostname}`];
   }
 
   console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
