@@ -74,7 +74,7 @@ const createTerminal = (core, ws, options = {}, args = []) => {
     }
   };
 
-  term.on('data', (data) => ws.send(data));
+  term.onData((data) => ws.send(data));
   ws.on('message', (data) => term.write(data));
   ws.on('close', () => kill());
 

@@ -23,8 +23,8 @@
     "osjs"
   ],
   "dependencies": {
-    "node-pty": "^0.7.8",
-    "uuid": "^3.3.2"
+    "node-pty": "^0.9.0",
+    "uuid": "^3.3.3"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
@@ -36,27 +36,27 @@
     "type": "package"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/runtime": "^7.2.0",
-    "@osjs/eslint-config": "^1.0.0",
-    "babel-loader": "^8.0.5",
-    "clipboard-polyfill": "^2.7.0",
-    "copy-webpack-plugin": "^4.6.0",
-    "css-loader": "^1.0.1",
-    "eslint": "^5.12.0",
-    "file-loader": "^1.1.11",
-    "hyperapp": "^1.2.9",
-    "mini-css-extract-plugin": "^0.4.5",
-    "node-sass": "^4.11.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "sass-loader": "^7.1.0",
-    "stylelint": "^9.9.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.4.4",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.2.0",
-    "xterm": "^3.10.0"
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.7.7",
+    "@osjs/eslint-config": "^1.0.1",
+    "babel-loader": "^8.0.6",
+    "clipboard-polyfill": "^2.8.6",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.0",
+    "eslint": "^6.8.0",
+    "file-loader": "^5.0.2",
+    "hyperapp": "^1.2.10",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^8.0.0",
+    "stylelint": "^12.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-scss": "^3.13.0",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "xterm": "^3.14.5"
   }
 }
