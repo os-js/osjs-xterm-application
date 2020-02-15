@@ -23,8 +23,11 @@
     "osjs"
   ],
   "dependencies": {
+    "clipboard-polyfill": "^2.8.6",
+    "hyperapp": "^1.2.10",
     "node-pty": "^0.9.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "xterm": "^3.14.5"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
@@ -36,27 +39,7 @@
     "type": "package"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/runtime": "^7.7.7",
-    "@osjs/eslint-config": "^1.0.1",
-    "@osjs/stylelint-config": "^1.0.1",
-    "babel-loader": "^8.0.6",
-    "clipboard-polyfill": "^2.8.6",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^3.4.0",
-    "eslint": "^6.8.0",
-    "file-loader": "^5.0.2",
-    "hyperapp": "^1.2.10",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "sass-loader": "^8.0.0",
-    "stylelint": "^12.0.0",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10",
-    "xterm": "^3.14.5"
+    "@osjs/dev-meta": "^1.0.1"
   },
   "eslintConfig": {
     "env": {
