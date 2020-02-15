@@ -7,13 +7,15 @@
     "en_EN": "Xterm",
     "nb_NO": "Xterm",
     "fr_FR": "Xterm",
-    "de_DE": "Xterm"
+    "de_DE": "Xterm",
+    "pt_BR": "Xterm"
   },
   "description": {
     "en_EN": "Xterm remote shell",
     "nb_NO": "Xterm shell via fjerntjener",
     "fr_FR": "Shell distant Xterm",
-    "de_DE": "Entfernte Shell Xterm"
+    "de_DE": "Entfernte Shell Xterm",
+    "pt_BR": "Shell remoto Xterm"
   },
   "server": "server.js",
   "files": [
