@@ -28,11 +28,12 @@
  * @licence Simplified BSD License
  */
 
-import './index.scss';
 import {Terminal} from 'xterm';
-import * as fit from 'xterm/lib/addons/fit/fit';
-import * as attach from 'xterm/lib/addons/attach/attach';
+import {FitAddon} from 'xterm-addon-fit';
+import {AttachAddon} from 'xterm-addon-attach';
 import * as clipboard from 'clipboard-polyfill';
+
+import './index.scss';
 import osjs from 'osjs';
 import {name as applicationName} from './metadata.json';
 
@@ -49,17 +50,20 @@ const createConnection = async (core, proc, win, term) => {
     }
   };
 
-  term.fit();
   term.clear();
   term.writeln('Requesting connection....');
 
-  const response = await proc.request('/create', {method: 'post', body: params});
+  const {uuid} = await proc.request('/create', {method: 'post', body: params});
+
   const ws = proc.socket('/socket', {
     socket: {
       reconnect: false
     }
   });
-  const uuid = response.uuid;
+
+  const attachAddon = new AttachAddon(ws.connection);
+  term.loadAddon(attachAddon);
+
   let closed = false;
   let pinged = false;
   let pid = -1;
@@ -70,7 +74,6 @@ const createConnection = async (core, proc, win, term) => {
     if (!pinged) {
       pinged = true;
       pid = parseInt(ev.data, 10);
-      term.attach(ws.connection);
     }
   });
 
@@ -79,20 +82,20 @@ const createConnection = async (core, proc, win, term) => {
     closed = true;
   });
 
-  term.on('key', () => {
+  term.onKey(() => {
     if (closed) {
       win.destroy();
     }
   });
 
-  term.on('resize', (size) => {
+  term.onResize((size) => {
     const {cols, rows} = size;
     proc.request('/resize', {method: 'post', body: {size: {cols, rows}, pid, uuid}});
   });
 
   win.on('destroy', () => {
     ws.destroy();
-    term.destroy();
+    term.dispose();
   });
 };
 
@@ -102,16 +105,20 @@ const createConnection = async (core, proc, win, term) => {
 const createTerminal = (core, proc, index) => {
   const term = new Terminal();
 
+  const fitAddon = new FitAddon();
+  term.loadAddon(fitAddon);
+
   const fit = () => {
     setTimeout(() => {
-      term.fit();
+      fitAddon.fit();
       term.focus();
+      term.scrollToBottom();
     }, 100);
   };
 
   const render = ($content) => {
     term.open($content);
-    term.fit();
+    fitAddon.fit();
     term.focus();
 
     $content.addEventListener('contextmenu', ev => {
@@ -150,6 +157,7 @@ const createTerminal = (core, proc, index) => {
     .on('blur', () => term.blur())
     .on('render', (win) => {
       createConnection(core, proc, win, term);
+      fitAddon.fit();
       win.focus();
     })
     .render(render);
@@ -159,9 +167,6 @@ const createTerminal = (core, proc, index) => {
 // Callback for launching application
 //
 osjs.register(applicationName, (core, args, options, metadata) => {
-  Terminal.applyAddon(fit);
-  Terminal.applyAddon(attach);
-
   const proc = core.make('osjs/application', {
     args,
     options,

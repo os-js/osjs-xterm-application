@@ -27,7 +27,9 @@
     "hyperapp": "^1.2.10",
     "node-pty": "^0.9.0",
     "uuid": "^7.0.1",
-    "xterm": "^3.14.5"
+    "xterm": "^4.4.0",
+    "xterm-addon-attach": "^0.5.0",
+    "xterm-addon-fit": "^0.3.0"
   },
   "author": "Anders Evenrud <andersevenrud@gmail.com>",
   "license": "BSD-2-Clause",
@@ -39,7 +41,7 @@
     "type": "package"
   },
   "devDependencies": {
-    "@osjs/dev-meta": "^1.0.1"
+    "@osjs/dev-meta": "^1.0.3"
   },
   "eslintConfig": {
     "env": {
