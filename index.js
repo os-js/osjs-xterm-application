@@ -36,7 +36,6 @@ import * as clipboard from 'clipboard-polyfill';
 import osjs from 'osjs';
 import {name as applicationName} from './metadata.json';
 
-
 /*
  * Creates a new Terminal connection
  */

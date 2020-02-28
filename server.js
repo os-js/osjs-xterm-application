@@ -30,7 +30,7 @@
 
 const os = require('os');
 const pty = require('node-pty');
-const uuidv4 = require('uuid/v4');
+const {v4: uuidv4} = require('uuid');
 
 let connections = {};
 let terminals = [];
@@ -74,7 +74,13 @@ const createTerminal = (core, ws, options = {}, args = []) => {
     }
   };
 
-  term.onData((data) => ws.send(data));
+  term.onData((data) => {
+    try {
+      ws.send(data);
+    } catch (e) {
+      console.warn(e);
+    }
+  });
   ws.on('message', (data) => term.write(data));
   ws.on('close', () => kill());
 
