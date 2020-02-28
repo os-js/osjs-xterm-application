@@ -1,7 +1,7 @@
 {
   "name": "@osjs/xterm-application",
-  "version": "1.1.16",
-  "description": "OS.js v3 Xterm Application",
+  "version": "1.2.0",
+  "description": "OS.js Xterm Application",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint index.js",
