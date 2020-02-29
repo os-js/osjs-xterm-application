@@ -40,4 +40,8 @@
   }
 
   @import 'xterm';
+
+  .xterm .xterm-helper-textarea {
+    left: 0 !important;
+  }
 }
