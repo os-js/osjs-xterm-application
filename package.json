@@ -1,6 +1,6 @@
 {
   "name": "@osjs/xterm-application",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "OS.js Xterm Application",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
