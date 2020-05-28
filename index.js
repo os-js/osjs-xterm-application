@@ -30,8 +30,8 @@
 
 import {Terminal} from 'xterm';
 import {FitAddon} from 'xterm-addon-fit';
-import {AttachAddon} from 'xterm-addon-attach';
 import * as clipboard from 'clipboard-polyfill';
+import {AttachAddon} from './attach.js';
 
 import './index.scss';
 import osjs from 'osjs';
@@ -54,6 +54,7 @@ const createConnection = async (core, proc, win, term) => {
   term.writeln('Requesting connection....');
 
   const {uuid} = await proc.request('/create', {method: 'post', body: params});
+  const pingInterval = core.config('xterm.ping', 30000);
 
   const ws = proc.socket('/socket', {
     socket: {
@@ -64,11 +65,18 @@ const createConnection = async (core, proc, win, term) => {
   const attachAddon = new AttachAddon(ws.connection);
   term.loadAddon(attachAddon);
 
+  let pinger;
   let closed = false;
   let pinged = false;
   let pid = -1;
 
-  ws.on('open', () => ws.send(uuid));
+  ws.on('open', () => {
+    ws.send(uuid);
+
+    pinger = setInterval(() => {
+      ws.send(JSON.stringify({action: 'ping'}));
+    }, pingInterval);
+  });
 
   ws.on('message', (ev) => {
     if (!pinged) {
@@ -80,6 +88,7 @@ const createConnection = async (core, proc, win, term) => {
   ws.on('close', () => {
     term.writeln('... Disconnected. Press any key to close terminal ...');
     closed = true;
+    clearInterval(pinger);
   });
 
   term.onKey(() => {
