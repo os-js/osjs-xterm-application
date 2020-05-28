@@ -146,6 +146,8 @@ const init = async (core, proc) => {
     if (found) {
       found.terminal.resize(cols, rows);
     }
+
+    res.send();
   });
 
   app.ws(proc.resource('/socket'), (ws, req) => {
