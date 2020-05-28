@@ -54,6 +54,7 @@ const createConnection = async (core, proc, win, term) => {
   term.writeln('Requesting connection....');
 
   const {uuid} = await proc.request('/create', {method: 'post', body: params});
+  const pingInterval = core.config('xterm.ping', 30000);
 
   const ws = proc.socket('/socket', {
     socket: {
@@ -74,7 +75,7 @@ const createConnection = async (core, proc, win, term) => {
 
     pinger = setInterval(() => {
       ws.send(JSON.stringify({action: 'ping'}));
-    }, 30000);
+    }, pingInterval);
   });
 
   ws.on('message', (ev) => {
