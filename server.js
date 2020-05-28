@@ -76,12 +76,25 @@ const createTerminal = (core, ws, options = {}, args = []) => {
 
   term.onData((data) => {
     try {
-      ws.send(data);
+      // This is a workaround for ping wrapper
+      ws.send(JSON.stringify({content: data}));
     } catch (e) {
       console.warn(e);
     }
   });
-  ws.on('message', (data) => term.write(data));
+
+  ws.on('message', (data) => {
+    // This is a workaround for ping wrapper
+    if (typeof data === 'string') {
+      const message = JSON.parse(data);
+      if (message.data) {
+        term.write(message.data);
+      }
+    } else {
+      term.write(data);
+    }
+  });
+
   ws.on('close', () => kill());
 
   terminals.push({
