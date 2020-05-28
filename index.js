@@ -30,23 +30,12 @@
 
 import {Terminal} from 'xterm';
 import {FitAddon} from 'xterm-addon-fit';
-import {AttachAddon} from 'xterm-addon-attach';
 import * as clipboard from 'clipboard-polyfill';
+import {AttachAddon} from './attach.js';
 
 import './index.scss';
 import osjs from 'osjs';
 import {name as applicationName} from './metadata.json';
-
-// This is a workaround for ping wrapper
-class CustomAttachAddon extends AttachAddon {
-  _sendData(data) {
-    if (this._socket.readyState !== 1) {
-      return;
-    }
-
-    this._socket.send(JSON.stringify({data}));
-  }
-}
 
 /*
  * Creates a new Terminal connection
@@ -72,7 +61,7 @@ const createConnection = async (core, proc, win, term) => {
     }
   });
 
-  const attachAddon = new CustomAttachAddon(ws.connection);
+  const attachAddon = new AttachAddon(ws.connection);
   term.loadAddon(attachAddon);
 
   let pinger;
@@ -126,15 +115,6 @@ const createTerminal = (core, proc, index) => {
 
   const fitAddon = new FitAddon();
   term.loadAddon(fitAddon);
-
-  // This is a workaround for ping wrapper
-  const originalWrite = term.write.bind(term);
-  term.write = (data) => {
-    const message = JSON.parse(data);
-    if (message.content) {
-      originalWrite(message.content);
-    }
-  };
 
   const fit = () => {
     setTimeout(() => {
