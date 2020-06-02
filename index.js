@@ -40,7 +40,7 @@ import {name as applicationName} from './metadata.json';
 /*
  * Creates a new Terminal connection
  */
-const createConnection = async (core, proc, win, term) => {
+const createConnection = async (core, proc, win, term, fit) => {
   const params = {
     connection: {
     },
@@ -82,6 +82,9 @@ const createConnection = async (core, proc, win, term) => {
     if (!pinged) {
       pinged = true;
       pid = parseInt(ev.data, 10);
+
+      proc.request('/resize', {method: 'post', body: {size: params.size, pid, uuid}});
+      fit();
     }
   });
 
@@ -106,6 +109,8 @@ const createConnection = async (core, proc, win, term) => {
     ws.destroy();
     term.dispose();
   });
+
+  fit();
 };
 
 /*
@@ -164,11 +169,7 @@ const createTerminal = (core, proc, index) => {
     .on('moved', () => term.focus())
     .on('focus', () => term.focus())
     .on('blur', () => term.blur())
-    .on('render', (win) => {
-      createConnection(core, proc, win, term);
-      fitAddon.fit();
-      win.focus();
-    })
+    .on('render', (win) => createConnection(core, proc, win, term, fit))
     .render(render);
 };
 
