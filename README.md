@@ -37,7 +37,8 @@ Start from application menu.
 If you want to change this behavior, you can add this to your `src/server/config.js` file in the OS.js distribution:
 
 ```javascript
-{
+module.exports = {
+  // ... append this to your export ...
   xterm: {
     // You can also set this as a string to force a username
     login: false
@@ -48,7 +49,8 @@ If you want to change this behavior, you can add this to your `src/server/config
 You can also change the connection arguments:
 
 ```javascript
-{
+module.exports = {
+  // ... append this to your export ...
   xterm: {
     ssh: {
       // Custom hostname
