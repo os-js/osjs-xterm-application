@@ -74,6 +74,15 @@ const createTerminal = (core, ws, options = {}, args = []) => {
     }
   };
 
+  term.onExit((ev) => {
+    try {
+      // This is a workaround for ping wrapper
+      ws.send(JSON.stringify({action: 'exit', event: ev}));
+    } catch (e) {
+      console.warn(e);
+    }
+  })
+
   term.onData((data) => {
     try {
       // This is a workaround for ping wrapper

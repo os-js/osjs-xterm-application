@@ -79,7 +79,12 @@ const createConnection = async (core, proc, win, term, fit) => {
   });
 
   ws.on('message', (ev) => {
-    if (!pinged) {
+    if (pinged) {
+      const message = JSON.parse(ev.data);
+      if (message.action === 'exit' && message.event.exitCode === 0) {
+        win.close();
+      }
+    } else {
       pinged = true;
       pid = parseInt(ev.data, 10);
 
