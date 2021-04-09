@@ -41,7 +41,7 @@
     "type": "package"
   },
   "devDependencies": {
-    "@osjs/dev-meta": "^1.0.3"
+    "@osjs/dev-meta": "^2.0.0"
   },
   "eslintConfig": {
     "env": {

@@ -27,9 +27,11 @@ module.exports = {
     osjs: 'OSjs'
   },
   plugins: [
-    new CopyWebpackPlugin([
-      'logo.svg'
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        'logo.svg'
+      ]
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
