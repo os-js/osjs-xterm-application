@@ -41,13 +41,18 @@ let terminals = [];
 const createTerminal = (core, ws, options = {}, args = []) => {
   const useLogin = core.config('xterm.login', true);
   const hostname = core.config('xterm.ssh.hostname', 'localhost');
-  const extraArguments = core.config('xterm.ssh.args', '');
 
   if (useLogin) {
     const username = typeof useLogin === 'string' ? useLogin : options.username;
-    args = [...args, '-c', `ssh ${extraArguments} ${username}@${hostname}`];
+    let sshCommand = `sshpass -p ${process.env.SSH_PASSWORD} ssh -o StrictHostKeyChecking=no ${username}@${hostname}`;
+
+    // If you're on Windows, you have to run `sshpass` from your WSL distro.
+    // Make sure you have the sshpass binary installed.
+    if (os.platform() === 'win32') sshCommand = `wsl -- ${sshCommand}`;
+    args = [...args, '-c', sshCommand];
   }
 
+  // Logs on the server side (CLI) so does not pose a security threat
   console.log('[Xterm]', 'Creating terminal...', {useLogin, options, args});
 
   const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';

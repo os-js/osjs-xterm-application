@@ -4,10 +4,8 @@ function addSocketListener(socket, type, handler) {
   socket.addEventListener(type, handler);
   return {
     dispose: () => {
-      if (!handler) {
-        // Already disposed
-        return;
-      }
+      // Already disposed
+      if (!handler) return;
       socket.removeEventListener(type, handler);
     }
   };
@@ -60,9 +58,7 @@ export class AttachAddon {
   }
 
   _sendBinary(data) {
-    if (this._socket.readyState !== 1) {
-      return;
-    }
+    if (this._socket.readyState !== 1) return;
     const buffer = new Uint8Array(data.length);
     for (let i = 0; i < data.length; ++i) {
       buffer[i] = data.charCodeAt(i) & 255;
