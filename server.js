@@ -169,7 +169,7 @@ const init = async (core, proc) => {
       found.terminal.resize(cols, rows);
     }
 
-    res.send();
+    res.send({});
   });
 
   app.ws(proc.resource('/socket'), (ws, req) => {
